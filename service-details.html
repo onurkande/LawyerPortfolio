@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Law - Attorney Jane Smith</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <style>
+        /* Base Styles */
+        :root {
+          /* Colors - Navy blue palette with gold accent */
+          --primary-color: #1a365d;
+          --primary-dark: #0f2942;
+          --primary-light: #2c4b7c;
+          --secondary-color: #b8a369;
+          --secondary-light: #d4c697;
+          --gray-dark: #333333;
+          --gray-medium: #666666;
+          --gray-light: #f8f9fa;
+          --white: #ffffff;
+          --black: #000000;
+
+          /* Typography */
+          --heading-font: "Playfair Display", serif;
+          --body-font: "Inter", sans-serif;
+
+          /* Dimensions */
+          --header-height: 80px;
+          --section-spacing: 100px;
+          --border-radius: 8px;
+          --card-border-radius: 16px;
+          --container-max-width: 1200px;
+
+          /* Transitions */
+          --transition-fast: 0.3s;
+          --transition-medium: 0.5s;
+        }
+
+        /* Reset & General Styles */
+        body {
+          font-family: var(--body-font);
+          color: var(--gray-dark);
+          line-height: 1.7;
+          overflow-x: hidden;
+          background-color: var(--white);
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+          font-family: var(--heading-font);
+          font-weight: 600;
+          line-height: 1.3;
+          color: var(--gray-dark);
+        }
+
+        p {
+          margin-bottom: 1rem;
+        }
+
+        a {
+          color: var(--primary-color);
+          text-decoration: none;
+          transition: all var(--transition-fast);
+        }
+
+        a:hover {
+          color: var(--secondary-color);
+        }
+
+        section {
+          padding: 100px 0;
+        }
+
+        .section-title {
+          font-family: var(--heading-font);
+          font-size: 2.5rem;
+          font-weight: 700;
+          margin-bottom: 1rem;
+          position: relative;
+        }
+
+        .section-subtitle {
+          font-size: 1.1rem;
+          color: var(--gray-medium);
+          margin-bottom: 3rem;
+        }
+
+        .py-6 {
+          padding-top: 5rem;
+          padding-bottom: 5rem;
+        }
+
+        .min-vh-80 {
+          min-height: 80vh;
+        }
+
+        .rounded-4 {
+          border-radius: 1rem;
+        }
+
+        /* Buttons */
+        .btn {
+          padding: 0.75rem 1.5rem;
+          border-radius: var(--border-radius);
+          font-weight: 500;
+          transition: all var(--transition-fast);
+        }
+
+        .btn-primary {
+          background-color: var(--primary-color);
+          border-color: var(--primary-color);
+          color: var(--white);
+          position: relative;
+          overflow: hidden;
+          z-index: 1;
+        }
+
+        .btn-primary::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 0;
+          height: 100%;
+          background-color: var(--secondary-color);
+          border-color: var(--secondary-color);
+          transition: width 0.3s ease;
+          z-index: -1;
+        }
+
+        .btn-primary:hover {
+          background-color: var(--primary-dark);
+          border-color: var(--primary-dark);
+          transform: translateY(-3px);
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary:hover::before {
+          width: 100%;
+        }
+
+        .btn-outline-primary {
+          border-color: var(--primary-color);
+          color: var(--primary-color);
+        }
+
+        .btn-outline-primary:hover {
+          background-color: var(--primary-color);
+          color: var(--white);
+          transform: translateY(-3px);
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-outline-light {
+          border-color: var(--white);
+          color: var(--white);
+          position: relative;
+          overflow: hidden;
+          z-index: 1;
+        }
+
+        .btn-outline-light::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 0;
+          height: 100%;
+          background-color: var(--white);
+          transition: width 0.3s ease;
+          z-index: -1;
+        }
+
+        .btn-outline-light:hover {
+          background-color: transparent;
+          color: var(--primary-color);
+          transform: translateY(-3px);
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-outline-light:hover::before {
+          width: 100%;
+        }
+
+        .btn-dark {
+          background-color: var(--gray-dark);
+          border-color: var(--gray-dark);
+        }
+
+        .btn-dark:hover {
+          background-color: var(--black);
+          border-color: var(--black);
+          transform: translateY(-3px);
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Logo */
+        .logo {
+          display: flex;
+          align-items: center;
+          font-family: var(--heading-font);
+        }
+
+        .logo-icon {
+          font-size: 1.8rem;
+          color: var(--secondary-color);
+          margin-right: 0.5rem;
+        }
+
+        .logo-text {
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: var(--primary-color);
+        }
+
+        /* Navbar */
+        .navbar {
+          padding: 1rem 0;
+          background-color: #1a1a1a;
+          box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+          transition: all var(--transition-fast);
+        }
+
+        .navbar-brand {
+          padding: 0;
+        }
+
+        .navbar-brand img {
+          height: 50px;
+          width: auto;
+        }
+
+        .nav-link {
+          font-weight: 500;
+          padding: 0.5rem 1rem !important;
+          color: #ffffff !important;
+          position: relative;
+          transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+          color: var(--secondary-color) !important;
+        }
+
+        .nav-item.dropdown .nav-link {
+          padding-right: 2rem !important;
+        }
+
+        .nav-item.dropdown .nav-link::after {
+          font-family: 'Font Awesome 5 Free';
+          font-weight: 900;
+          position: absolute;
+          right: 1rem;
+          top: 50%;
+          transform: translateY(-50%);
+          transition: transform 0.3s ease;
+        }
+
+        .nav-item.dropdown.show .nav-link::after {
+          transform: translateY(-50%) rotate(180deg);
+        }
+
+        .dropdown-menu {
+          background-color: #2a2a2a;
+          border: none;
+          border-radius: 8px;
+          padding: 0.5rem 0;
+          margin-top: 0.5rem;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .dropdown-item {
+          color: #ffffff;
+          padding: 0.5rem 1.5rem;
+          transition: all 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+          background-color: var(--secondary-color);
+          color: #ffffff;
+        }
+
+        .btn-consultation {
+          background: linear-gradient(135deg, var(--secondary-color), #d4c697);
+          color: #ffffff;
+          border: none;
+          padding: 0.75rem 2rem;
+          border-radius: 50px;
+          font-weight: 600;
+          transition: all 0.3s ease;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.75rem;
+          position: relative;
+          overflow: hidden;
+          box-shadow: 0 4px 15px rgba(184, 163, 105, 0.3);
+          margin-left: 2rem;
+        }
+
+        .btn-consultation::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+          transition: 0.5s;
+        }
+
+        .btn-consultation:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 6px 20px rgba(184, 163, 105, 0.4);
+        }
+
+        .btn-consultation:hover::before {
+          left: 100%;
+        }
+
+        .btn-consultation i {
+          font-size: 1.1rem;
+          transition: transform 0.3s ease;
+        }
+
+        .btn-consultation:hover i {
+          transform: rotate(15deg);
+        }
+
+        @media (max-width: 991.98px) {
+          .btn-consultation {
+            margin-left: 0;
+            margin-top: 1rem;
+            width: 100%;
+            justify-content: center;
+          }
+        }
+
+        /* Hero Section */
+        .hero {
+          height: 900px;
+          position: relative;
+          background-image: url("https://images.pexels.com/photos/5668468/pexels-photo-5668468.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+          background-size: cover;
+          background-position: center;
+          color: var(--white);
+          padding-top: calc(var(--header-height) + 3rem);
+        }
+
+        .hero h1 {
+          color: var(--white);
+          margin-bottom: 1.5rem;
+        }
+
+        .hero-subtitle {
+          font-size: 1.2rem;
+          opacity: 0.9;
+        }
+
+        .hero-title-container {
+          display: flex;
+          align-items: center;
+          margin-bottom: 1rem;
+        }
+
+        .hero-title-icon {
+          font-size: 2.5rem;
+          color: var(--secondary-color);
+          margin-right: 1rem;
+        }
+
+        .hero-slogan-container {
+          display: flex;
+          align-items: center;
+          margin-bottom: 2rem;
+        }
+
+        .hero-slogan-icon {
+          font-size: 1.5rem;
+          color: var(--secondary-light);
+          margin-right: 1rem;
+        }
+
+        /* Service Detail Content */
+        .service-detail {
+          background-color: var(--white);
+          padding: 80px 0;
+        }
+
+        .service-detail-content {
+          /*max-width: 800px;*/
+          margin: 0 auto;
+        }
+
+        .service-detail h2 {
+          color: var(--primary-color);
+          font-size: 2.2rem;
+          margin-bottom: 1.5rem;
+          margin-top: 3rem;
+          position: relative;
+          padding-bottom: 1rem;
+        }
+
+        .service-detail h2::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 80px;
+          height: 3px;
+          background: var(--secondary-color);
+        }
+
+        .service-detail h3 {
+          color: var(--primary-color);
+          font-size: 1.6rem;
+          margin-bottom: 1.2rem;
+          margin-top: 2rem;
+        }
+
+        .service-detail p {
+          color: var(--gray-medium);
+          font-size: 1.1rem;
+          line-height: 1.8;
+          margin-bottom: 1.5rem;
+        }
+
+        .service-detail ul, .service-detail ol {
+          color: var(--gray-medium);
+          font-size: 1.1rem;
+          line-height: 1.8;
+          margin-bottom: 1.5rem;
+          padding-left: 1.5rem;
+        }
+
+        .service-detail li {
+          margin-bottom: 0.75rem;
+        }
+
+        .info-box {
+          background-color: rgba(26, 54, 93, 0.05);
+          border-left: 4px solid var(--primary-color);
+          padding: 1.5rem;
+          margin: 2rem 0;
+          border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .info-box h4 {
+          color: var(--primary-color);
+          font-size: 1.3rem;
+          margin-bottom: 1rem;
+        }
+
+        .info-box p {
+          margin-bottom: 0;
+        }
+
+        .warning-box {
+          background-color: rgba(184, 163, 105, 0.1);
+          border-left: 4px solid var(--secondary-color);
+          padding: 1.5rem;
+          margin: 2rem 0;
+          border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .warning-box h4 {
+          color: var(--secondary-color);
+          font-size: 1.3rem;
+          margin-bottom: 1rem;
+        }
+
+        .warning-box p {
+          margin-bottom: 0;
+        }
+
+        .service-image {
+          border-radius: var(--card-border-radius);
+          overflow: hidden;
+          margin: 2rem 0;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-image img {
+          width: 100%;
+          height: auto;
+        }
+
+        /* Related Services */
+        .related-services {
+          background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+          padding: 80px 0;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .related-services::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231a365d' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+          opacity: 0.5;
+        }
+
+        .related-service-card {
+          background-color: var(--white);
+          border-radius: var(--card-border-radius);
+          padding: 2rem;
+          height: 100%;
+          transition: all var(--transition-medium);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+          position: relative;
+          overflow: hidden;
+          border: 1px solid rgba(26, 54, 93, 0.1);
+        }
+
+        .related-service-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 4px;
+          background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+          transform: scaleX(0);
+          transition: transform 0.3s ease;
+        }
+
+        .related-service-card:hover {
+          transform: translateY(-10px);
+          box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .related-service-card:hover::before {
+          transform: scaleX(1);
+        }
+
+        .related-service-icon {
+          width: 70px;
+          height: 70px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: linear-gradient(135deg, rgba(26, 54, 93, 0.1), rgba(184, 163, 105, 0.1));
+          border-radius: 50%;
+          margin-bottom: 1.5rem;
+          position: relative;
+          transition: all 0.3s ease;
+        }
+
+        .related-service-icon::before {
+          content: '';
+          position: absolute;
+          top: -5px;
+          left: -5px;
+          right: -5px;
+          bottom: -5px;
+          border: 2px solid var(--secondary-color);
+          border-radius: 50%;
+          opacity: 0;
+          transition: all 0.3s ease;
+        }
+
+        .related-service-card:hover .related-service-icon::before {
+          opacity: 1;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+        }
+
+        .related-service-icon i {
+          font-size: 2rem;
+          color: var(--primary-color);
+          transition: all 0.3s ease;
+        }
+
+        .related-service-card:hover .related-service-icon i {
+          transform: scale(1.1);
+          color: var(--secondary-color);
+        }
+
+        .related-service-card h3 {
+          font-size: 1.4rem;
+          margin-bottom: 1rem;
+          color: var(--primary-color);
+          font-weight: 600;
+          position: relative;
+          padding-bottom: 0.75rem;
+        }
+
+        .related-service-card h3::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 40px;
+          height: 2px;
+          background: var(--secondary-color);
+          transition: width 0.3s ease;
+        }
+
+        .related-service-card:hover h3::after {
+          width: 80px;
+        }
+
+        .related-service-card p {
+          color: var(--gray-medium);
+          font-size: 1rem;
+          line-height: 1.7;
+          margin-bottom: 1.5rem;
+        }
+
+        .related-service-link {
+          display: inline-flex;
+          align-items: center;
+          color: var(--primary-color);
+          font-weight: 500;
+          text-decoration: none;
+          transition: all 0.3s ease;
+        }
+
+        .related-service-link i {
+          margin-left: 0.5rem;
+          transition: transform 0.3s ease;
+        }
+
+        .related-service-link:hover {
+          color: var(--secondary-color);
+        }
+
+        .related-service-link:hover i {
+          transform: translateX(5px);
+        }
+
+        /* Subscription Section */
+        .subscription {
+          background-color: var(--primary-color);
+          padding: 80px 0;
+          color: var(--white);
+        }
+
+        .subscription-content {
+          max-width: 600px;
+          margin: 0 auto;
+          text-align: center;
+        }
+
+        .subscription h2 {
+          color: var(--white);
+          font-size: 2.2rem;
+          margin-bottom: 1.5rem;
+        }
+
+        .subscription p {
+          color: rgba(255, 255, 255, 0.8);
+          font-size: 1.1rem;
+          margin-bottom: 2rem;
+        }
+
+        .subscription-form {
+          display: flex;
+          max-width: 500px;
+          margin: 0 auto;
+        }
+
+        .subscription-form .form-control {
+          flex: 1;
+          height: 54px;
+          border-radius: var(--border-radius) 0 0 var(--border-radius);
+          border: none;
+          padding: 0 1.5rem;
+          font-size: 1rem;
+        }
+
+        .subscription-form .btn {
+          height: 54px;
+          border-radius: 0 var(--border-radius) var(--border-radius) 0;
+          background-color: var(--secondary-color);
+          border-color: var(--secondary-color);
+          color: var(--white);
+          font-weight: 600;
+          padding: 0 1.5rem;
+        }
+
+        .subscription-form .btn:hover {
+          background-color: var(--secondary-light);
+          border-color: var(--secondary-light);
+        }
+
+        @media (max-width: 767.98px) {
+          .subscription-form {
+            flex-direction: column;
+          }
+
+          .subscription-form .form-control {
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+          }
+
+          .subscription-form .btn {
+            border-radius: var(--border-radius);
+            width: 100%;
+          }
+        }
+
+        /* Footer */
+        .footer {
+          background-color: var(--gray-dark);
+          color: var(--gray-light);
+        }
+
+        .footer-top {
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer .logo-text {
+          color: var(--white);
+        }
+
+        .footer-heading {
+          color: var(--white);
+          font-family: var(--heading-font);
+          font-size: 1.25rem;
+          margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+          list-style: none;
+          padding-left: 0;
+        }
+
+        .footer-links li {
+          margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+          color: #ced4da;
+          transition: all var(--transition-fast);
+        }
+
+        .footer-links a:hover {
+          color: var(--secondary-color);
+          padding-left: 5px;
+        }
+
+        .footer-contact {
+          list-style: none;
+          padding-left: 0;
+        }
+
+        .footer-contact li {
+          display: flex;
+          margin-bottom: 1rem;
+        }
+
+        .footer-contact i {
+          width: 24px;
+          margin-right: 0.75rem;
+          margin-top: 0.25rem;
+          color: var(--secondary-color);
+        }
+
+        .footer-social {
+          display: flex;
+          gap: 1rem;
+          margin-top: 1.5rem;
+        }
+
+        .social-link {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 40px;
+          height: 40px;
+          background-color: rgba(255, 255, 255, 0.1);
+          border-radius: 50%;
+          color: var(--white);
+          transition: all var(--transition-fast);
+        }
+
+        .social-link:hover {
+          background-color: var(--secondary-color);
+          color: var(--white);
+          transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-bottom a {
+          color: var(--gray-light);
+        }
+
+        .footer-bottom a:hover {
+          color: var(--secondary-color);
+        }
+
+        /* Back to Top */
+        .back-to-top {
+          position: fixed;
+          bottom: 30px;
+          right: 30px;
+          width: 45px;
+          height: 45px;
+          background-color: var(--primary-color);
+          color: var(--white);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          opacity: 0;
+          visibility: hidden;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+          transition: all var(--transition-fast);
+          z-index: 99;
+        }
+
+        .back-to-top.active {
+          opacity: 1;
+          visibility: visible;
+        }
+
+        .back-to-top:hover {
+          background-color: var(--secondary-color);
+          color: var(--white);
+          transform: translateY(-5px);
+        }
+
+        /* Fade In Animation */
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .fade-in {
+          animation: fadeIn 0.5s ease forwards;
+        }
+
+        /* Responsive */
+        @media (max-width: 991.98px) {
+          .section-title {
+            font-size: 2rem;
+          }
+
+          .hero h1 {
+            font-size: 3rem;
+          }
+
+          .navbar-collapse {
+            background-color: #2a2a2a;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+          }
+        }
+
+        @media (max-width: 767.98px) {
+          .section-title {
+            font-size: 1.75rem;
+          }
+
+          .hero h1 {
+            font-size: 2.5rem;
+          }
+
+          .py-6 {
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+          }
+          
+          .service-detail h2 {
+            font-size: 1.8rem;
+          }
+          
+          .service-detail h3 {
+            font-size: 1.4rem;
+          }
+        }
+
+        @media (max-width: 575.98px) {
+          .section-title {
+            font-size: 1.5rem;
+          }
+
+          .hero h1 {
+            font-size: 2rem;
+          }
+
+          .py-6 {
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+          }
+        }
+
+        .navbar-toggler {
+          background-color: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="https://www.alperkagantatar.av.tr/wp-content/uploads/2024/12/LOGO.png" alt="Logo">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                About
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="about.html">About Us</a></li>
+                                <li><a class="dropdown-item" href="team.html">Our Team</a></li>
+                                <li><a class="dropdown-item" href="history.html">History</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Practice Areas
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item active" href="family-law.html">Family Law</a></li>
+                                <li><a class="dropdown-item" href="criminal-law.html">Criminal Law</a></li>
+                                <li><a class="dropdown-item" href="real-estate-law.html">Real Estate Law</a></li>
+                                <li><a class="dropdown-item" href="constitutional-law.html">Constitutional Law</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="testimonials.html">Testimonials</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                        <li class="nav-item ms-lg-3">
+                            <a class="btn btn-consultation" href="contact.html">
+                                <i class="fas fa-phone-alt"></i>
+                                Free Consultation
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="container">
+            <div class="row min-vh-80 align-items-center">
+                <div class="col-lg-8 text-white">
+                    <div class="hero-title-container">
+                        <div class="hero-title-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h1 class="display-3 fw-bold">Family Law Services</h1>
+                    </div>
+                    <div class="hero-slogan-container">
+                        <div class="hero-slogan-icon">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <p class="lead mb-0">Compassionate legal support for families during life's most challenging transitions.</p>
+                    </div>
+                    <p class="hero-subtitle mb-5">Our experienced family law attorneys provide personalized guidance and strong advocacy to protect what matters most to you.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#service-detail" class="btn btn-primary btn-lg">Learn More</a>
+                        <a href="#contact" class="btn btn-outline-light btn-lg">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Detail Content -->
+    <section id="service-detail" class="service-detail">
+        <div class="container" style="max-width: 1300px;">
+            <div class="service-detail-content">
+                <h2>Comprehensive Family Law Services</h2>
+                <p>At Jane Smith Law Firm, we understand that family legal matters are often emotionally challenging and deeply personal. Our dedicated team of family law attorneys brings decades of combined experience to help you navigate these complex situations with compassion, discretion, and strategic legal guidance.</p>
+                
+                <p>We believe in a client-centered approach that prioritizes your unique needs and goals. Whether you're facing divorce, child custody disputes, or other family law matters, we're committed to protecting your rights and helping you achieve the best possible outcome for you and your loved ones.</p>
+                
+                <div class="service-image">
+                    <img src="https://images.pexels.com/photos/5668468/pexels-photo-5668468.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Family Law Consultation">
+                </div>
+                
+                <h2>Divorce Proceedings</h2>
+                <p>Divorce is often one of life's most challenging transitions. Our attorneys provide comprehensive legal support throughout the entire process, from initial filing to final resolution. We handle both contested and uncontested divorces with the sensitivity and legal expertise they require.</p>
+                
+                <h3>Contested Divorce</h3>
+                <p>When spouses cannot agree on key issues such as property division, child custody, or support, a contested divorce may be necessary. Our attorneys are skilled litigators who will vigorously advocate for your interests in court while still pursuing opportunities for settlement when possible.</p>
+                
+                <h3>Uncontested Divorce</h3>
+                <p>For couples who can reach agreement on major issues, an uncontested divorce offers a more streamlined and cost-effective approach. We can help you navigate the legal requirements and paperwork to ensure a smooth process that protects your interests.</p>
+                
+                <div class="info-box">
+                    <h4>Did You Know?</h4>
+                    <p>Mediation can significantly reduce the time, cost, and emotional stress of divorce proceedings. Our attorneys are skilled in mediation techniques that can help you reach amicable solutions while preserving important family relationships.</p>
+                </div>
+                
+                <h2>Child Custody and Visitation</h2>
+                <p>Nothing is more important than your children's wellbeing. Our family law attorneys help parents establish custody and visitation arrangements that serve the best interests of their children while protecting parental rights.</p>
+                
+                <h3>Types of Custody Arrangements</h3>
+                <ul>
+                    <li><strong>Legal Custody:</strong> The right to make important decisions about your child's upbringing, including education, healthcare, and religious instruction.</li>
+                    <li><strong>Physical Custody:</strong> Determines where the child will primarily reside.</li>
+                    <li><strong>Joint Custody:</strong> Parents share decision-making responsibilities and/or physical custody.</li>
+                    <li><strong>Sole Custody:</strong> One parent has primary decision-making authority and/or physical custody.</li>
+                </ul>
+                
+                <h3>Visitation Rights</h3>
+                <p>We help non-custodial parents establish meaningful visitation schedules that allow them to maintain strong relationships with their children. We also assist custodial parents in ensuring that visitation arrangements protect their children's safety and wellbeing.</p>
+                
+                <div class="warning-box">
+                    <h4>Important Consideration</h4>
+                    <p>Courts make custody decisions based on the "best interests of the child" standard. Factors considered include the child's relationship with each parent, stability of each home environment, and each parent's ability to provide for the child's physical and emotional needs.</p>
+                </div>
+                
+                <h2>Child Support</h2>
+                <p>Child support ensures that both parents contribute financially to their children's upbringing. Our attorneys help clients understand their rights and obligations regarding child support.</p>
+                
+                <h3>Calculating Child Support</h3>
+                <p>Child support calculations typically consider factors such as:</p>
+                <ul>
+                    <li>Each parent's income</li>
+                    <li>The number of children requiring support</li>
+                    <li>Custody arrangements</li>
+                    <li>Children's healthcare and educational needs</li>
+                    <li>Other relevant financial factors</li>
+                </ul>
+                
+                <h3>Modification of Child Support</h3>
+                <p>When circumstances change significantly, child support orders may need modification. We assist clients in seeking appropriate adjustments to support orders based on changes in income, custody arrangements, or children's needs.</p>
+                
+                <h2>Alimony/Spousal Support</h2>
+                <p>Alimony, also known as spousal support or maintenance, may be awarded to help a financially dependent spouse maintain their standard of living after divorce. Our attorneys advocate for fair spousal support arrangements, whether you're seeking support or being asked to provide it.</p>
+                
+                <h3>Factors Affecting Alimony</h3>
+                <ul>
+                    <li>Length of the marriage</li>
+                    <li>Each spouse's income and earning capacity</li>
+                    <li>Age and health of each spouse</li>
+                    <li>Standard of living established during the marriage</li>
+                    <li>Contributions to the marriage, including homemaking</li>
+                </ul>
+                
+                <h2>Property Division</h2>
+                <p>Dividing marital assets and debts is often one of the most complex aspects of divorce. Our attorneys help clients identify, value, and equitably divide marital property while protecting their financial interests.</p>
+                
+                <h3>Marital vs. Separate Property</h3>
+                <p>Generally, assets acquired during the marriage are considered marital property subject to division, while property owned before marriage or received as gifts or inheritance may be considered separate property. Our attorneys help clients distinguish between these categories and advocate for fair treatment of complex assets.</p>
+                
+                <div class="service-image">
+                    <img src="https://images.pexels.com/photos/5668859/pexels-photo-5668859.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Family Law Documents">
+                </div>
+                
+                <h2>Prenuptial and Postnuptial Agreements</h2>
+                <p>Marital agreements can provide clarity and protection for both spouses. We help clients negotiate and draft comprehensive prenuptial and postnuptial agreements that address property rights, support obligations, and other financial matters.</p>
+                
+                <h3>Benefits of Marital Agreements</h3>
+                <ul>
+                    <li>Protection of separate property, including family businesses or inheritances</li>
+                    <li>Clarity regarding financial responsibilities during marriage</li>
+                    <li>Predetermined arrangements for property division and support in case of divorce</li>
+                    <li>Reduction of conflict and litigation expenses if the marriage ends</li>
+                </ul>
+                
+                <h2>Adoption and Guardianship</h2>
+                <p>Building or expanding your family through adoption or guardianship is a joyful but legally complex process. Our family law attorneys guide clients through every step, from initial application to finalization.</p>
+                
+                <h3>Types of Adoption We Handle</h3>
+                <ul>
+                    <li>Stepparent adoptions</li>
+                    <li>Private adoptions</li>
+                    <li>Agency adoptions</li>
+                    <li>International adoptions</li>
+                    <li>Foster care adoptions</li>
+                </ul>
+                
+                <h3>Guardianship</h3>
+                <p>When parents are unable to care for their children, guardianship may be necessary. We help family members and other caregivers establish legal guardianship to provide stability and proper care for children in need.</p>
+                
+                <div class="info-box">
+                    <h4>Our Commitment to You</h4>
+                    <p>Family law matters require not only legal expertise but also sensitivity and understanding. At Jane Smith Law Firm, we're committed to providing compassionate guidance while vigorously protecting your rights and interests. We'll be by your side every step of the way, helping you navigate these challenging times and move forward with confidence.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Services -->
+    <section class="related-services py-6">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8 text-center">
+                    <h2 class="section-title">Related Legal Services</h2>
+                    <p class="section-subtitle">Explore other areas of law that may be relevant to your family situation</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="related-service-card">
+                        <div class="related-service-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h3>Real Estate Law</h3>
+                        <p>Our real estate attorneys can help with property transfers, mortgage refinancing, and other real estate matters that often arise during divorce or family transitions.</p>
+                        <a href="real-estate-law.html" class="related-service-link">
+                            Learn More
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="related-service-card">
+                        <div class="related-service-icon">
+                            <i class="fas fa-gavel"></i>
+                        </div>
+                        <h3>Estate Planning</h3>
+                        <p>Protect your family's future with comprehensive estate planning, including wills, trusts, and powers of attorney tailored to your family's unique needs.</p>
+                        <a href="estate-planning.html" class="related-service-link">
+                            Learn More
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="related-service-card">
+                        <div class="related-service-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Domestic Violence Protection</h3>
+                        <p>We provide immediate legal assistance for those facing domestic violence, including restraining orders and safety planning for you and your children.</p>
+                        <a href="domestic-violence.html" class="related-service-link">
+                            Learn More
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Subscription Section -->
+    <section class="subscription">
+        <div class="container">
+            <div class="subscription-content">
+                <h2>Stay Informed</h2>
+                <p>Subscribe to our newsletter for the latest legal insights, tips, and updates on family law matters.</p>
+                <form class="subscription-form">
+                    <input type="email" class="form-control" placeholder="Your Email Address" required>
+                    <button type="submit" class="btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top py-5">
+                <div class="row">
+                    <div class="col-lg-4 mb-4 mb-lg-0">
+                        <div class="footer-logo mb-4">
+                            <div class="logo">
+                                <span class="logo-icon"><i class="fas fa-balance-scale"></i></span>
+                                <span class="logo-text">JSL</span>
+                            </div>
+                        </div>
+                        <p class="footer-about">Attorney Jane Smith Law Firm provides comprehensive legal services with a focus on client satisfaction and successful case resolution.</p>
+                        <div class="footer-social">
+                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-2 mb-4 mb-lg-0">
+                        <h4 class="footer-heading">Quick Links</h4>
+                        <ul class="footer-links">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="services.html">Practice Areas</a></li>
+                            <li><a href="testimonials.html">Testimonials</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 col-lg-2 mb-4 mb-lg-0">
+                        <h4 class="footer-heading">Practice Areas</h4>
+                        <ul class="footer-links">
+                            <li><a href="family-law.html">Family Law</a></li>
+                            <li><a href="criminal-law.html">Criminal Law</a></li>
+                            <li><a href="real-estate-law.html">Real Estate Law</a></li>
+                            <li><a href="constitutional-law.html">Constitutional Law</a></li>
+                            <li><a href="labor-law.html">Labor Law</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 col-lg-4">
+                        <h4 class="footer-heading">Contact Information</h4>
+                        <ul class="footer-contact">
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>123 Legal Street, Metropolitan Suite No.123, New York, NY 10001</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone"></i>
+                                <span>(555) 123-4567</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                <span>contact@janesmith.law</span>
+                            </li>
+                        </ul>
+                        <div class="footer-map mt-3">
+                            <img src="/placeholder.svg?height=150&width=300&query=map location new york" alt="Office Location" class="img-fluid rounded">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom py-3">
+                <div class="row align-items-center">
+                    <div class="col-md-6 text-center text-md-start">
+                        <p class="mb-md-0">&copy; 2025 Jane Smith Law. All Rights Reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <p class="mb-0">
+                            <a href="#">Privacy Policy</a> | 
+                            <a href="#">Terms of Service</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Navbar scroll effect
+            const navbar = document.querySelector(".navbar");
+            const backToTop = document.getElementById("backToTop");
+
+            window.addEventListener("scroll", () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add("scrolled");
+                    backToTop.classList.add("active");
+                } else {
+                    navbar.classList.remove("scrolled");
+                    backToTop.classList.remove("active");
+                }
+            });
+
+            // Back to top functionality
+            backToTop.addEventListener("click", (e) => {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth",
+                });
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+                anchor.addEventListener("click", function (e) {
+                    e.preventDefault();
+
+                    if (this.getAttribute("href") === "#") return;
+
+                    const targetId = this.getAttribute("href");
+                    const targetElement = document.querySelector(targetId);
+
+                    if (targetElement) {
+                        const navbarHeight = document.querySelector(".navbar").offsetHeight;
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: "smooth",
+                        });
+                    }
+                });
+            });
+
+            // Form submission
+            const contactForm = document.getElementById("contactForm");
+            if (contactForm) {
+                contactForm.addEventListener("submit", (e) => {
+                    e.preventDefault();
+                    // Add form submission logic here
+                    alert("Thank you for your message! We will get back to you soon.");
+                    contactForm.reset();
+                });
+            }
+
+            // Subscription form
+            const subscriptionForm = document.querySelector(".subscription-form");
+            if (subscriptionForm) {
+                subscriptionForm.addEventListener("submit", (e) => {
+                    e.preventDefault();
+                    alert("Thank you for subscribing to our newsletter!");
+                    subscriptionForm.reset();
+                });
+            }
+
+            // Animate elements on scroll
+            const animateElements = () => {
+                const elements = document.querySelectorAll(
+                    ".related-service-card, .service-image, .info-box, .warning-box"
+                );
+
+                elements.forEach((element) => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+
+                    if (elementPosition < windowHeight * 0.85) {
+                        element.style.opacity = "1";
+                        element.style.transform = "translateY(0)";
+                    }
+                });
+            };
+
+            // Set initial state for animations
+            const setInitialAnimationState = () => {
+                const elements = document.querySelectorAll(
+                    ".related-service-card, .service-image, .info-box, .warning-box"
+                );
+
+                elements.forEach((element) => {
+                    element.style.opacity = "0";
+                    element.style.transform = "translateY(20px)";
+                    element.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+                });
+            };
+
+            setInitialAnimationState();
+            animateElements(); // Run once on load
+
+            window.addEventListener("scroll", animateElements);
+        });
+    </script>
+</body>
+</html>
