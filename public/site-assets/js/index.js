@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setInterval(() => {
         currentSlide = (currentSlide + 1) % testimonialSlides.length;
         showSlide(currentSlide);
-    }, 5000);
+    }, 10000);
 
     // Form submission
     const contactForm = document.getElementById("contactForm");

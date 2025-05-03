@@ -16,18 +16,17 @@
                         <div class="hero-title-icon">
                             <i class="fas fa-envelope-open-text"></i>
                         </div>
-                        <h1 class="display-3 fw-bold">Contact Us</h1>
+                        <h1 class="display-3 fw-bold">{{$contact->title ?? 'İletişime Geçin'}}</h1>
                     </div>
                     <div class="hero-slogan-container">
                         <div class="hero-slogan-icon">
                             <i class="fas fa-handshake"></i>
                         </div>
-                        <p class="lead mb-0">We're here to help with your legal needs.</p>
+                        <p class="lead mb-0">{{$contact->description ?? 'İletişime geçmek için lütfen aşağıdaki formu doldurunuz.'}}</p>
                     </div>
-                    <p class="hero-subtitle mb-5">Reach out to our team of experienced attorneys for a consultation or to discuss your case. We're committed to providing responsive and personalized legal services.</p>
-                    <div class="d-flex gap-3">
-                        <a href="#contact-form" class="btn btn-primary btn-lg">Send a Message</a>
-                        <a href="#contact-info" class="btn btn-outline-light btn-lg">Our Office</a>
+                     <div class="d-flex gap-3">
+                        <a href="#contact-form" class="btn btn-primary btn-lg">Mesaj Gönder</a>
+                        <a href="#contact-info" class="btn btn-outline-light btn-lg">Ofisimiz</a>
                     </div>
                 </div>
             </div>
@@ -39,8 +38,8 @@
         <div class="container">
             <div class="row justify-content-center mb-5">
                 <div class="col-lg-8 text-center">
-                    <h2 class="section-title">Get in Touch</h2>
-                    <p class="section-subtitle">We're available to assist you through multiple channels</p>
+                    <h2 class="section-title">{{$contact->title ?? 'İletişime Geçin'}}</h2>
+                    <p class="section-subtitle">{{$contact->description ?? 'İletişime geçmek için lütfen aşağıdaki formu doldurunuz.'}}</p>
                 </div>
             </div>
             <div class="row g-4">
@@ -50,9 +49,9 @@
                         <div class="contact-info-icon">
                             <i class="fas fa-phone-alt"></i>
                         </div>
-                        <h3>Phone</h3>
-                        <p>Call us directly for immediate assistance</p>
-                        <a href="tel:+15551234567">(555) 123-4567</a>
+                        <h3>Telefon Numaramız</h3>
+                        <p>Acil yardım için bizi doğrudan arayın</p>
+                        <a href="tel:+15551234567">{{$contact->phone ?? 'Telefon Numaranız'}}</a>
                     </div>
                 </div>
                 
@@ -62,9 +61,9 @@
                         <div class="contact-info-icon">
                             <i class="fas fa-envelope"></i>
                         </div>
-                        <h3>Email</h3>
-                        <p>Send us an email anytime</p>
-                        <a href="mailto:contact@janesmith.law">contact@janesmith.law</a>
+                        <h3>Email Adresimiz</h3>
+                        <p>Herhangi bir zamanda bize email gönderin</p>
+                        <a href="mailto:{{$contact->email ?? 'Email Adresiniz'}}">{{$contact->email ?? 'Email Adresiniz'}}</a>
                     </div>
                 </div>
                 
@@ -74,9 +73,8 @@
                         <div class="contact-info-icon">
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
-                        <h3>Address</h3>
-                        <p>123 Legal Street, Metropolitan Suite No.123</p>
-                        <p>New York, NY 10001</p>
+                        <h3>Adresimiz</h3>
+                        <p>{{$contact->address ?? 'Adresiniz'}}</p>
                     </div>
                 </div>
                 
@@ -86,9 +84,8 @@
                         <div class="contact-info-icon">
                             <i class="fas fa-clock"></i>
                         </div>
-                        <h3>Working Hours</h3>
-                        <p>Monday - Friday</p>
-                        <p>9:00 AM - 6:00 PM</p>
+                        <h3>Çalışma Saatleri</h3>
+                        <p>{{$contact->working_hours ?? 'Çalışma Saatleri'}}</p>
                     </div>
                 </div>
             </div>
@@ -102,42 +99,34 @@
                 <!-- Contact Form -->
                 <div class="col-lg-6">
                     <div class="contact-form-container">
-                        <h2 class="contact-form-title">Send Us a Message</h2>
-                        <p class="mb-4">Fill out the form below and we'll get back to you as soon as possible.</p>
+                        <h2 class="contact-form-title">İletişime Geçin</h2>
+                        <p class="mb-4">Formu doldurun ve en kısa sürede size dönüş yapacağız.</p>
                         
-                        <form id="contactForm">
+                        <form action="{{route('site.contact.store')}}" method="POST">
+                            @csrf
                             <div class="row">
                                 <div class="col-md-12">
-                                    <input type="text" class="form-control" placeholder="Full Name *" required>
+                                    <input type="text" name="name" class="form-control" placeholder="Adınız *" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="email" class="form-control" placeholder="Email Address *" required>
+                                    <input type="email" name="email" class="form-control" placeholder="Email Adresiniz *" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="tel" class="form-control" placeholder="Phone Number">
+                                    <input type="tel" name="phone" class="form-control" placeholder="Telefon Numaranız">
                                 </div>
                                 <div class="col-md-12">
-                                    <select class="form-select">
-                                        <option selected>Select Subject</option>
-                                        <option value="Consultation">Consultation</option>
-                                        <option value="Appointment">Appointment</option>
-                                        <option value="Information">Information Request</option>
-                                        <option value="Other">Other</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-12">
-                                    <textarea class="form-control" rows="5" placeholder="Your Message *" required></textarea>
+                                    <textarea name="description" class="form-control" rows="5" placeholder="Mesajınız *" required></textarea>
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="kvkkCheck" required>
                                         <label class="form-check-label" for="kvkkCheck">
-                                            I agree to the processing of my personal data in accordance with the Privacy Policy
+                                            Kişisel Verilerinizin İşlenmesine İzin Veriyorum
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn btn-primary w-100">Send Message</button>
+                                    <button type="submit" class="btn btn-primary w-100">Mesaj Gönder</button>
                                 </div>
                             </div>
                         </form>
@@ -147,7 +136,7 @@
                 <!-- Google Maps -->
                 <div class="col-lg-6">
                     <div class="map-container">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.15830869428!2d-74.11976397304903!3d40.69766374874431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2str!4v1650000000000!5m2!1sen!2str" allowfullscreen="" loading="lazy"></iframe>
+                        {!! $contact->iframe ?? 'iframe kodunuz yok' !!}
                     </div>
                 </div>
             </div>
