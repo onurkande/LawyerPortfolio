@@ -33,7 +33,7 @@
                             <label for="image">Görsel</label>
                             @if($blogSettings && $blogSettings->image)
                                 <div class="mb-2">
-                                    <img src="{{ asset($blogSettings->image) }}" alt="Blog Settings" class="img-thumbnail" style="max-height: 200px;">
+                                    <img src="{{ asset('storage/'.$blogSettings->image) }}" alt="Blog Settings" class="img-thumbnail" style="max-height: 200px;">
                                 </div>
                             @endif
                             <div class="custom-file">
@@ -89,7 +89,7 @@
                                 <td>{{ $blog->id }}</td>
                                 <td>
                                     @if($blog->image)
-                                        <img src="{{ asset($blog->image) }}" alt="{{ $blog->title }}" class="img-thumbnail" style="max-height: 50px;">
+                                        <img src="{{ asset('storage/'.$blog->image) }}" alt="{{ $blog->title }}" class="img-thumbnail" style="max-height: 50px;">
                                     @else
                                         <span class="text-muted">Görsel yok</span>
                                     @endif

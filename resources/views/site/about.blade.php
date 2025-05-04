@@ -8,7 +8,7 @@
 
 @section('content')
     <!-- Hero Section -->
-    <section id="hero" class="hero" style="background-image: url('{{ isset($about->image) ? asset($about->image) : url('https://images.pexels.com/photos/5668859/pexels-photo-5668859.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') }}');">
+    <section id="hero" class="hero" style="background-image: url('{{ isset($about->image) ? asset('storage/'.$about->image) : url('https://images.pexels.com/photos/5668859/pexels-photo-5668859.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') }}');">
         <div class="container">
             <div class="row min-vh-80 align-items-center">
                 <div class="col-lg-8 text-white">
@@ -44,7 +44,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-5">
                     <div class="about-image">
-                        <img src="{{ isset($about->image) ? asset($about->image) : url('https://images.pexels.com/photos/5668859/pexels-photo-5668859.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') }}" alt="{{$about->title ?? 'Hakkımızda'}}">
+                        <img src="{{ isset($about->image) ? asset('storage/'.$about->image) : url('https://images.pexels.com/photos/5668859/pexels-photo-5668859.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') }}" alt="{{$about->title ?? 'Hakkımızda'}}">
                     </div>
                 </div>
                 <div class="col-lg-7">
@@ -146,20 +146,20 @@
                         <h3>İletişim Bilgileri</h3>
                         <div class="location-item">
                             <i class="fas fa-map-marker-alt"></i>
-                            <p>{{$contact->address}}</p>
+                            <p>{{$contact->address ?? 'adres yok'}}</p>
                         </div>
                         <div class="location-item">
                             <i class="fas fa-phone"></i>
-                            <p>{{$contact->phone}}</p>
+                            <p>{{$contact->phone ?? 'telefon yok'}}</p>
                         </div>
                         <div class="location-item">
                             <i class="fas fa-envelope"></i>
-                            <p>{{$contact->email}}</p>
+                            <p>{{$contact->email ?? 'email yok'}}</p>
                         </div>
                         <div class="location-hours">
                             <h4>Ofis Saatleri</h4>
                             <div class="hours-item">
-                                <span class="hours-day">{{$contact->office_hours}}</span>
+                                <span class="hours-day">{{$contact->working_hours ?? 'ofis saatleri yok'}}</span>
                             </div>
                         </div>
                         <div class="mt-4">

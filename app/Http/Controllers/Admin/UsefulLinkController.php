@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\UsefulLink;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class UsefulLinkController extends Controller
 {
@@ -22,21 +22,19 @@ class UsefulLinkController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+        $validated = $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif| '
         ]);
 
         if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('uploads/useful-links'), $imageName);
+            $imagePath = $request->file('image')->store('useful-links', 'public');
+            $validated['image'] = $imagePath;
         }
 
-        UsefulLink::create([
-            'image' => 'uploads/useful-links/' . $imageName
-        ]);
+        UsefulLink::create($validated);
 
-        return redirect()->route('admin.useful-links.index')->with('success', 'Faydalı link başarıyla eklendi.');
+        return redirect()->route('admin.useful-links.index')
+            ->with('success', 'Faydalı link başarıyla oluşturuldu.');
     }
 
     public function edit(UsefulLink $usefulLink)
@@ -46,36 +44,36 @@ class UsefulLinkController extends Controller
 
     public function update(Request $request, UsefulLink $usefulLink)
     {
-        $request->validate([
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+        $validated = $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif| '
         ]);
 
         if ($request->hasFile('image')) {
             // Eski resmi sil
-            if (File::exists(public_path($usefulLink->image))) {
-                File::delete(public_path($usefulLink->image));
+            if ($usefulLink->image) {
+                Storage::disk('public')->delete($usefulLink->image);
             }
 
-            $image = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('uploads/useful-links'), $imageName);
-
-            $usefulLink->update([
-                'image' => 'uploads/useful-links/' . $imageName
-            ]);
+            $imagePath = $request->file('image')->store('useful-links', 'public');
+            $validated['image'] = $imagePath;
         }
 
-        return redirect()->route('admin.useful-links.index')->with('success', 'Faydalı link başarıyla güncellendi.');
+        $usefulLink->update($validated);
+
+        return redirect()->route('admin.useful-links.index')
+            ->with('success', 'Faydalı link başarıyla güncellendi.');
     }
 
     public function destroy(UsefulLink $usefulLink)
     {
-        if (File::exists(public_path($usefulLink->image))) {
-            File::delete(public_path($usefulLink->image));
+        // Resmi sil
+        if ($usefulLink->image) {
+            Storage::disk('public')->delete($usefulLink->image);
         }
 
         $usefulLink->delete();
 
-        return redirect()->route('admin.useful-links.index')->with('success', 'Faydalı link başarıyla silindi.');
+        return redirect()->route('admin.useful-links.index')
+            ->with('success', 'Faydalı link başarıyla silindi.');
     }
 } 

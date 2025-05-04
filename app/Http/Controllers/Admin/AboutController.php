@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\About;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AboutController extends Controller
 {
@@ -22,21 +23,19 @@ class AboutController extends Controller
             'content' => 'required',
             'mission' => 'required',
             'vision' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif| '
         ]);
 
         $about = About::first();
 
         if ($request->hasFile('image')) {
             // Eski resmi sil
-            if ($about && $about->image && file_exists(public_path($about->image))) {
-                unlink(public_path($about->image));
+            if ($about && $about->image) {
+                Storage::disk('public')->delete($about->image);
             }
 
-            $image = $request->file('image');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->move(public_path('uploads/abouts'), $imageName);
-            $validated['image'] = 'uploads/abouts/' . $imageName;
+            $imagePath = $request->file('image')->store('abouts', 'public');
+            $validated['image'] = $imagePath;
         }
 
         if ($about) {
@@ -52,8 +51,8 @@ class AboutController extends Controller
     public function destroy(About $about)
     {
         // Resmi sil
-        if ($about->image && file_exists(public_path($about->image))) {
-            unlink(public_path($about->image));
+        if ($about->image) {
+            Storage::disk('public')->delete($about->image);
         }
 
         $about->delete();

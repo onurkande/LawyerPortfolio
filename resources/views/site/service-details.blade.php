@@ -8,7 +8,7 @@
 
 @section('content')
     <!-- Hero Section -->
-    <section id="hero" class="hero" style="background-image: url('{{ isset($service->image) ? asset($service->image) : url("https://images.pexels.com/photos/5668468/pexels-photo-5668468.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1") }}');">
+    <section id="hero" class="hero" style="background-image: url('{{ isset($service->image) ? asset('storage/'.$service->image) : url("https://images.pexels.com/photos/5668468/pexels-photo-5668468.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1") }}');">
         <div class="container">
             <div class="row min-vh-80 align-items-center">
                 <div class="col-lg-8 text-white">

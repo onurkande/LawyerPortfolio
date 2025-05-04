@@ -8,6 +8,7 @@ use App\Models\BlogCategory;
 use App\Models\BlogSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
 {
@@ -32,14 +33,12 @@ class BlogController extends Controller
             'description' => 'required',
             'content' => 'required',
             'tags' => 'nullable|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif| '
         ]);
 
         if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->move(public_path('uploads/blogs'), $imageName);
-            $validated['image'] = 'uploads/blogs/' . $imageName;
+            $imagePath = $request->file('image')->store('blogs', 'public');
+            $validated['image'] = $imagePath;
         }
 
         $validated['slug'] = Str::slug($validated['title']);
@@ -64,19 +63,17 @@ class BlogController extends Controller
             'description' => 'required',
             'content' => 'required',
             'tags' => 'nullable|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif| '
         ]);
 
         if ($request->hasFile('image')) {
             // Eski resmi sil
-            if ($blog->image && file_exists(public_path($blog->image))) {
-                unlink(public_path($blog->image));
+            if ($blog->image) {
+                Storage::disk('public')->delete($blog->image);
             }
 
-            $image = $request->file('image');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->move(public_path('uploads/blogs'), $imageName);
-            $validated['image'] = 'uploads/blogs/' . $imageName;
+            $imagePath = $request->file('image')->store('blogs', 'public');
+            $validated['image'] = $imagePath;
         }
 
         $validated['slug'] = Str::slug($validated['title']);
@@ -90,8 +87,8 @@ class BlogController extends Controller
     public function destroy(Blog $blog)
     {
         // Resmi sil
-        if ($blog->image && file_exists(public_path($blog->image))) {
-            unlink(public_path($blog->image));
+        if ($blog->image) {
+            Storage::disk('public')->delete($blog->image);
         }
 
         $blog->delete();

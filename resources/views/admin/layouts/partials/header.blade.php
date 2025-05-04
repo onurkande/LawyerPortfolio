@@ -71,7 +71,7 @@
             >
               <div class="avatar-sm">
                 <img
-                  src="{{ asset('admin-assets/assets/img/profile.jpg') }}"
+                  src="https://static.vecteezy.com/system/resources/previews/020/429/953/non_2x/admin-icon-vector.jpg"
                   alt="..."
                   class="avatar-img rounded-circle"
                 />
@@ -89,7 +89,7 @@
                   <div class="user-box">
                     <div class="avatar-lg">
                       <img
-                        src="{{ asset('admin-assets/assets/img/profile.jpg') }}"
+                        src="https://static.vecteezy.com/system/resources/previews/020/429/953/non_2x/admin-icon-vector.jpg"
                         alt="image profile"
                         class="avatar-img rounded"
                       />
@@ -99,7 +99,7 @@
                       <h4>{{ Auth::user()->name }}</h4>
                       <p class="text-muted">{{ Auth::user()->email }}</p>
                       <a
-                        href="profile.html"
+                        href="#"
                         class="btn btn-xs btn-secondary btn-sm"
                         >Profilim</a
                       >

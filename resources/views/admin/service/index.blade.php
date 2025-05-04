@@ -38,7 +38,7 @@
                             <label for="image">Görsel</label>
                             @if($serviceSettings && $serviceSettings->image)
                                 <div class="mb-2">
-                                    <img src="{{ asset($serviceSettings->image) }}" alt="Service Settings" class="img-thumbnail" style="max-height: 200px;">
+                                    <img src="{{ asset('storage/'.$serviceSettings->image) }}" alt="Service Settings" class="img-thumbnail" style="max-height: 200px;">
                                 </div>
                             @endif
                             <div class="custom-file">
@@ -88,7 +88,7 @@
                                 <td>{{ $service->id }}</td>
                                 <td>
                                     @if($service->image)
-                                        <img src="{{ asset($service->image) }}" alt="{{ $service->title }}" class="img-thumbnail" style="max-height: 50px;">
+                                        <img src="{{ asset('storage/'.$service->image) }}" alt="{{ $service->title }}" class="img-thumbnail" style="max-height: 50px;">
                                     @else
                                         <span class="text-muted">Görsel yok</span>
                                     @endif

@@ -6,10 +6,10 @@
                 <div class="col-lg-4 mb-4 mb-lg-0">
                     <div class="footer-logo mb-4">
                         <div class="logo">
-                            <img src="{{ isset($siteSettings->logo) ? asset($siteSettings->logo) : asset('assets/images/logo.png') }}" alt="Logo" class="logo-img" style="width: 100px; height: 100px;">
+                            <img src="{{ isset($siteSettings->logo) ? asset('storage/'.$siteSettings->logo) : asset('assets/images/logo.png') }}" alt="Logo" class="logo-img" style="width: 100px; height: 100px;">
                         </div>
                     </div>
-                    <p class="footer-about">{{$siteSettings->hero_description}}</p>
+                    <p class="footer-about">{{$siteSettings->hero_description ?? 'Açıklama yok'}}</p>
                     {{-- <div class="footer-social">
                         <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
@@ -31,7 +31,7 @@
                     <h4 class="footer-heading">Hizmet Alanları</h4>
                     <ul class="footer-links">
                         @foreach ($services as $service)
-                            <li><a href="{{route('site.services.show', $service->slug)}}">{{$service->title}}</a></li>
+                            <li><a href="{{route('site.service.show', $service->slug)}}">{{$service->title}}</a></li>
                         @endforeach
                     </ul>
                 </div>
@@ -40,15 +40,15 @@
                     <ul class="footer-contact">
                         <li>
                             <i class="fas fa-map-marker-alt"></i>
-                            <span>{{$contact->address}}</span>
+                            <span>{{$contact->address ?? 'adres yok'}}</span>
                         </li>
                         <li>
                             <i class="fas fa-phone"></i>
-                            <span>{{$contact->phone}}</span>
+                            <span>{{$contact->phone ?? 'telefon yok'}}</span>
                         </li>
                         <li>
                             <i class="fas fa-envelope"></i>
-                            <span>{{$contact->email}}</span>
+                            <span>{{$contact->email ?? 'email yok'}}</span>
                         </li>
                     </ul>
                 </div>
@@ -57,11 +57,11 @@
         <div class="footer-bottom py-3">
             <div class="row align-items-center">
                 <div class="col-md-6 text-center text-md-start">
-                    <p class="mb-md-0">{{$siteSettings->bottom_description}}</p>
+                    <p class="mb-md-0">{{$siteSettings->bottom_description ?? 'alt bölüm açıklama yok'}}</p>
                 </div>
                 <div class="col-md-6 text-center text-md-end">
                     <p class="mb-0">
-                        {{$siteSettings->bottom_info}}
+                        {{$siteSettings->bottom_info ?? 'alt bölüm bilgisi yok'}}
                     </p>
                 </div>
             </div>

@@ -8,7 +8,7 @@
 
 @section('content')
     <!-- Hero Section -->
-    <section id="hero" class="hero" style="background-image: url('{{ isset($blogSettings->image) ? asset($blogSettings->image) : asset('site-assets/images/hero-bg.jpg') }}');">
+    <section id="hero" class="hero" style="background-image: url('{{ isset($blogSettings->image) ? asset('storage/'.$blogSettings->image) : asset('site-assets/images/hero-bg.jpg') }}');">
         <div class="container">
             <div class="row min-vh-80 align-items-center">
                 <div class="col-lg-8 text-white">
@@ -26,7 +26,6 @@
                     </div>
                     <div class="d-flex gap-3">
                         <a href="#blog-section" class="btn btn-primary btn-lg">Bloglarımızı Keşfet</a>
-                        <a href="#newsletter" class="btn btn-outline-light btn-lg">Abone Ol</a>
                     </div>
                 </div>
             </div>
@@ -45,7 +44,7 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="blog-card">
                                         <div class="blog-image">
-                                            <img src="{{ isset($blog->image) ? asset($blog->image) : asset('site-assets/images/default-blog-image.jpg') }}" alt="{{ $blog->title }}">
+                                            <img src="{{ isset($blog->image) ? asset('storage/'.$blog->image) : asset('site-assets/images/default-blog-image.jpg') }}" alt="{{ $blog->title }}">
                                             <div class="blog-category">{{ $blog->category->title }}</div>
                                             <div class="blog-date">{{ $blog->created_at->format('d F Y') }}</div>
                                         </div>
@@ -153,7 +152,7 @@
                                 @foreach($blogs->take(3) as $blog)
                                     <div class="recent-post">
                                         <div class="recent-post-img">
-                                            <img src="{{ isset($blog->image) ? asset($blog->image) : asset('site-assets/images/default-blog-image.jpg') }}" alt="{{ $blog->title }}">
+                                            <img src="{{ isset($blog->image) ? asset('storage/'.$blog->image) : asset('site-assets/images/default-blog-image.jpg') }}" alt="{{ $blog->title }}">
                                         </div>
                                         <div class="recent-post-content">
                                             <h4 class="recent-post-title">
@@ -170,9 +169,13 @@
                         <div class="sidebar-widget">
                             <h3 class="sidebar-widget-title">Popüler Etiketler</h3>
                             <div class="tag-cloud">
-                                @foreach($blogs->first()->popularTags as $tag)
-                                    <a href="#" class="tag-link">{{ $tag }}</a>
-                                @endforeach
+                                @if($blogs->first())
+                                    @foreach($blogs->first()->popularTags as $tag)
+                                        <a href="#" class="tag-link">{{ $tag }}</a>
+                                    @endforeach
+                                @else
+                                    <p>Etiket yok</p>
+                                @endif
                             </div>
                         </div>
                     </div>

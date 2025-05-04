@@ -7,6 +7,7 @@ use App\Models\Service;
 use App\Models\ServiceSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class ServiceController extends Controller
 {
@@ -29,17 +30,15 @@ class ServiceController extends Controller
             'description' => 'required',
             'content' => 'required',
             'icon' => 'required|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif| '
         ]);
 
-        $validated['slug'] = Str::slug($validated['title']);
-
         if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->move(public_path('uploads/services'), $imageName);
-            $validated['image'] = 'uploads/services/' . $imageName;
+            $imagePath = $request->file('image')->store('services', 'public');
+            $validated['image'] = $imagePath;
         }
+
+        $validated['slug'] = Str::slug($validated['title']);
 
         Service::create($validated);
 
@@ -59,22 +58,20 @@ class ServiceController extends Controller
             'description' => 'required',
             'content' => 'required',
             'icon' => 'required|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif| '
         ]);
-
-        $validated['slug'] = Str::slug($validated['title']);
 
         if ($request->hasFile('image')) {
             // Eski resmi sil
-            if ($service->image && file_exists(public_path($service->image))) {
-                unlink(public_path($service->image));
+            if ($service->image) {
+                Storage::disk('public')->delete($service->image);
             }
 
-            $image = $request->file('image');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->move(public_path('uploads/services'), $imageName);
-            $validated['image'] = 'uploads/services/' . $imageName;
+            $imagePath = $request->file('image')->store('services', 'public');
+            $validated['image'] = $imagePath;
         }
+
+        $validated['slug'] = Str::slug($validated['title']);
 
         $service->update($validated);
 
@@ -85,8 +82,8 @@ class ServiceController extends Controller
     public function destroy(Service $service)
     {
         // Resmi sil
-        if ($service->image && file_exists(public_path($service->image))) {
-            unlink(public_path($service->image));
+        if ($service->image) {
+            Storage::disk('public')->delete($service->image);
         }
 
         $service->delete();

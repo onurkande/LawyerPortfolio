@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ContactController extends Controller
 {
@@ -17,28 +18,26 @@ class ContactController extends Controller
     public function update(Request $request)
     {
         $validated = $request->validate([
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif| ',
             'title' => 'required|max:255',
             'description' => 'required',
             'phone' => 'required|max:255',
             'email' => 'required|email|max:255',
             'address' => 'required',
             'working_hours' => 'required',
-            'iframe' => 'nullable',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'iframe' => 'nullable'
         ]);
 
         $contact = Contact::first();
 
         if ($request->hasFile('image')) {
             // Eski resmi sil
-            if ($contact && $contact->image && file_exists(public_path($contact->image))) {
-                unlink(public_path($contact->image));
+            if ($contact && $contact->image) {
+                Storage::disk('public')->delete($contact->image);
             }
 
-            $image = $request->file('image');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->move(public_path('uploads/contacts'), $imageName);
-            $validated['image'] = 'uploads/contacts/' . $imageName;
+            $imagePath = $request->file('image')->store('contacts', 'public');
+            $validated['image'] = $imagePath;
         }
 
         if ($contact) {
@@ -47,7 +46,6 @@ class ContactController extends Controller
             Contact::create($validated);
         }
 
-        return redirect()->route('admin.contacts.index')
-            ->with('success', 'İletişim ayarları başarıyla güncellendi.');
+        return redirect()->back()->with('success', 'İletişim bilgileri başarıyla güncellendi.');
     }
 } 

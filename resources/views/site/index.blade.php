@@ -8,7 +8,7 @@
 
 @section('content')
     <!-- Hero Section - Updated -->
-    <section id="home" class="hero" style="background-image: url('{{ isset($siteSettings->hero_image) ? asset($siteSettings->hero_image) : asset('assets/images/hero-bg.jpg') }}');">
+    <section id="home" class="hero" style="background-image: url('{{ isset($siteSettings->hero_image) ? asset('storage/'.$siteSettings->hero_image) : asset('assets/images/hero-bg.jpg') }}');">
         <div class="hero-overlay"></div>
         <div class="container">
             <div class="row min-vh-80 align-items-center">
@@ -17,13 +17,13 @@
                         <div class="hero-title-icon">
                             <i class="fas fa-gavel"></i>
                         </div>
-                        <h1 class="display-3 fw-bold">{{$siteSettings->hero_title}}</h1>
+                        <h1 class="display-3 fw-bold">{{$siteSettings->hero_title ?? 'Başlık yok'}}</h1>
                     </div>
                     <div class="hero-slogan-container">
                         <div class="hero-slogan-icon">
                             <i class="fas fa-balance-scale"></i>
                         </div>
-                        <p class="lead mb-0">{{$siteSettings->hero_description}}</p>
+                        <p class="lead mb-0">{{$siteSettings->hero_description ?? 'Açıklama yok'}}</p>
                     </div>
                     <div class="d-flex gap-3">
                         <a href="{{route('site.contact')}}" class="btn btn-primary btn-lg">İletişim</a>
@@ -40,8 +40,8 @@
             <div class="container">
                 <div class="row justify-content-center mb-5">
                     <div class="col-lg-8 text-center">
-                        <h2 class="section-title">{{$serviceSettings->title}}</h2>
-                        <p class="section-subtitle">{{$serviceSettings->description}}</p>
+                        <h2 class="section-title">{{$serviceSettings->title ?? 'hizmet başlığı yok'}}</h2>
+                        <p class="section-subtitle">{{$serviceSettings->description ?? 'hizmet açıklama yok'}}</p>
                     </div>
                 </div>
                 <div class="row g-4">
@@ -53,7 +53,7 @@
                                         <i class="{{$service->icon}}"></i>
                                     </div>
                                     <h3>{{$service->title}}</h3>
-                                    <p>{{$service->description}}</p>
+                                    <p>{!! Str::limit($service->content, 100) !!}</p>
                                     <a href="{{route('site.service.show', $service->slug)}}" class="service-link">
                                         Daha Fazla
                                         <i class="fas fa-arrow-right"></i>
@@ -80,7 +80,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-6 mb-4 mb-lg-0">
                         <div class="about-image">
-                            <img src="{{isset($abouts->image) ? asset($abouts->image) : url('https://images.pexels.com/photos/5669602/pexels-photo-5669602.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')}}" alt="Attorney Jane Smith" class="img-fluid">
+                            <img src="{{isset($abouts->image) ? asset('storage/'.$abouts->image) : url('https://images.pexels.com/photos/5669602/pexels-photo-5669602.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')}}" alt="Attorney Jane Smith" class="img-fluid">
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -133,12 +133,12 @@
                         <div class="col-md-4">
                             <div class="blog-card">
                                 <div class="blog-image">
-                                    <img src="{{isset($blog->image) ? asset($blog->image) : url('https://images.pexels.com/photos/5669602/pexels-photo-5669602.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')}}" alt="{{$blog->title}}">
+                                    <img src="{{isset($blog->image) ? asset('storage/'.$blog->image) : url('https://images.pexels.com/photos/5669602/pexels-photo-5669602.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')}}" alt="{{$blog->title}}">
                                     <div class="blog-date">{{$blog->created_at->format('d F Y')}}</div>
                                 </div>
                                 <div class="blog-content">
-                                    <h3 class="blog-title"><a href="{{route('site.blog.show', $blog->slug)}}">{{$blog->title}}</a></h3>
-                                    <p class="blog-excerpt">{!! Str::limit($blog->content, 100) !!}</p>
+                                    <h3 class="blog-title"><a href="{{route('site.blog.show', $blog->slug)}}">{{strip_tags($blog->title)}}</a></h3>
+                                    <p class="blog-excerpt">{{strip_tags(Str::limit($blog->content, 100))}}</p>
                                     <a href="{{route('site.blog.show', $blog->slug)}}" class="blog-read-more">
                                         Devamını Oku
                                         <i class="fas fa-arrow-right"></i>
@@ -455,7 +455,7 @@
                     <div class="partners-wrapper">
                         @foreach($usefulLinks as $link)
                             <div class="partner-item">
-                                <img src="{{ asset($link->image) }}" alt="Useful Link" class="img-fluid">
+                                <img src="{{ asset('storage/'.$link->image) }}" alt="Useful Link" class="img-fluid">
                             </div>
                         @endforeach
                     </div>

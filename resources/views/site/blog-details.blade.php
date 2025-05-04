@@ -8,7 +8,7 @@
 
 @section('content')
     <!-- Hero Section -->
-    <section id="hero" class="hero" style="background-image: url('{{ isset($blog->image) ? asset($blog->image) : asset('site-assets/images/hero-bg.jpg') }}');">
+    <section id="hero" class="hero" style="background-image: url('{{ isset($blog->image) ? asset('storage/'.$blog->image) : asset('site-assets/images/hero-bg.jpg') }}');">
         <div class="container">
             <div class="row min-vh-80 align-items-center">
                 <div class="col-lg-8 text-white">
@@ -60,7 +60,7 @@
                         </div>
 
                         <div class="blog-featured-image">
-                            <img src="{{ isset($blog->image) ? asset($blog->image) : asset('site-assets/images/default-blog-image.jpg') }}" alt="{{ $blog->title ?? 'Blog Detayları' }}">
+                            <img src="{{ isset($blog->image) ? asset('storage/'.$blog->image) : asset('site-assets/images/default-blog-image.jpg') }}" alt="{{ $blog->title ?? 'Blog Detayları' }}">
                         </div>
 
                         <div class="blog-content">
@@ -80,7 +80,7 @@
                                     <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(request()->url()) }}" target="_blank" class="blog-share-link"><i class="fab fa-facebook-f"></i></a>
                                     <a href="https://twitter.com/intent/tweet?url={{ urlencode(request()->url()) }}&text={{ urlencode($blog->title) }}" target="_blank" class="blog-share-link"><i class="fab fa-twitter"></i></a>
                                     <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ urlencode(request()->url()) }}&title={{ urlencode($blog->title) }}" target="_blank" class="blog-share-link"><i class="fab fa-linkedin-in"></i></a>
-                                    <a href="https://pinterest.com/pin/create/button/?url={{ urlencode(request()->url()) }}&media={{ urlencode(asset($blog->image)) }}&description={{ urlencode($blog->title) }}" target="_blank" class="blog-share-link"><i class="fab fa-pinterest"></i></a>
+                                    <a href="https://pinterest.com/pin/create/button/?url={{ urlencode(request()->url()) }}&media={{ urlencode(asset('storage/'.$blog->image)) }}&description={{ urlencode($blog->title) }}" target="_blank" class="blog-share-link"><i class="fab fa-pinterest"></i></a>
                                     <a href="mailto:?subject={{ urlencode($blog->title) }}&body={{ urlencode(request()->url()) }}" class="blog-share-link"><i class="fas fa-envelope"></i></a>
                                 </div>
                             </div>
@@ -96,7 +96,7 @@
                                     <div class="col-md-4">
                                         <div class="related-post-card">
                                             <div class="related-post-image">
-                                                <img src="{{ isset($relatedBlog->image) ? asset($relatedBlog->image) : asset('site-assets/images/default-blog-image.jpg') }}" alt="{{ $relatedBlog->title ?? 'İlgili Makaleler' }}">
+                                                <img src="{{ isset($relatedBlog->image) ? asset('storage/'.$relatedBlog->image) : asset('site-assets/images/default-blog-image.jpg') }}" alt="{{ $relatedBlog->title ?? 'İlgili Makaleler' }}">
                                                 <div class="related-post-category">{{ $relatedBlog->category->title ?? 'Kategori Yok' }}</div>
                                                 <div class="related-post-date">{{ $relatedBlog->created_at->format('d F Y') }}</div>
                                             </div>
@@ -147,7 +147,7 @@
                                 @foreach($blogs as $blog)
                                     <div class="recent-post">
                                         <div class="recent-post-img">
-                                            <img src="{{ isset($blog->image) ? asset($blog->image) : asset('site-assets/images/default-blog-image.jpg') }}" alt="{{ $blog->title ?? 'Son Makaleler' }}">
+                                            <img src="{{ isset($blog->image) ? asset('storage/'.$blog->image) : asset('site-assets/images/default-blog-image.jpg') }}" alt="{{ $blog->title ?? 'Son Makaleler' }}">
                                         </div>
                                         <div class="recent-post-content">
                                             <h4 class="recent-post-title">
@@ -176,7 +176,7 @@
     </section>
 
     <!-- Newsletter Section -->
-    <section id="newsletter" class="newsletter-section">
+    <!--<section id="newsletter" class="newsletter-section">
         <div class="container">
             <div class="newsletter-content">
                 <h2>Subscribe to Our Newsletter</h2>
@@ -187,7 +187,7 @@
                 </form>
             </div>
         </div>
-    </section>
+    </section>-->
 @endsection
 
 @section('scripts')

@@ -35,7 +35,7 @@
                                 <tr>
                                     <td>{{ $link->id }}</td>
                                     <td>
-                                        <img src="{{ asset($link->image) }}" alt="Link Image" style="max-width: 100px;">
+                                        <img src="{{ asset('storage/'.$link->image) }}" alt="Link Image" style="max-width: 100px;">
                                     </td>
                                     <td>{{ $link->created_at->format('d.m.Y H:i') }}</td>
                                     <td>

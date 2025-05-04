@@ -24,7 +24,7 @@
                             <label for="hero_image">Hero Görsel</label>
                             @if($siteSettings && $siteSettings->hero_image)
                                 <div class="mb-2">
-                                    <img src="{{ asset($siteSettings->hero_image) }}" alt="Hero Image" class="img-thumbnail" style="max-height: 200px;">
+                                    <img src="{{ asset('storage/'.$siteSettings->hero_image) }}" alt="Hero Image" class="img-thumbnail" style="max-height: 200px;">
                                 </div>
                             @endif
                             <div class="custom-file">
@@ -36,12 +36,12 @@
 
                         <div class="form-group">
                             <label for="hero_title">Hero Başlık</label>
-                            <input type="text" name="hero_title" id="hero_title" class="form-control" value="{{ $siteSettings->hero_title ?? old('hero_title') }}" required>
+                            <input type="text" name="hero_title" id="hero_title" class="form-control" value="{{ $siteSettings->hero_title ?? 'başlık yok' }}" required>
                         </div>
 
                         <div class="form-group">
                             <label for="hero_description">Hero Açıklama</label>
-                            <textarea name="hero_description" id="hero_description" class="form-control" rows="3" required>{{ $siteSettings->hero_description ?? old('hero_description') }}</textarea>
+                            <textarea name="hero_description" id="hero_description" class="form-control" rows="3" required>{{ $siteSettings->hero_description ?? 'Açıklama yok' }}</textarea>
                         </div>
 
                         <!-- Logo -->
@@ -49,7 +49,7 @@
                             <label for="logo">Logo</label>
                             @if($siteSettings && $siteSettings->logo)
                                 <div class="mb-2">
-                                    <img src="{{ asset($siteSettings->logo) }}" alt="Logo" class="img-thumbnail" style="max-height: 100px;">
+                                    <img src="{{ asset('storage/'.$siteSettings->logo) }}" alt="Logo" class="img-thumbnail" style="max-height: 100px;">
                                 </div>
                             @endif
                             <div class="custom-file">

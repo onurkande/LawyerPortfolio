@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\BlogSetting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BlogSettingController extends Controller
 {
@@ -13,21 +14,19 @@ class BlogSettingController extends Controller
         $validated = $request->validate([
             'title' => 'required|max:255',
             'description' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif| '
         ]);
 
         $blogSetting = BlogSetting::first();
 
         if ($request->hasFile('image')) {
             // Eski resmi sil
-            if ($blogSetting && $blogSetting->image && file_exists(public_path($blogSetting->image))) {
-                unlink(public_path($blogSetting->image));
+            if ($blogSetting && $blogSetting->image) {
+                Storage::disk('public')->delete($blogSetting->image);
             }
 
-            $image = $request->file('image');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->move(public_path('uploads/blogs'), $imageName);
-            $validated['image'] = 'uploads/blogs/' . $imageName;
+            $imagePath = $request->file('image')->store('blog-settings', 'public');
+            $validated['image'] = $imagePath;
         }
 
         if ($blogSetting) {
@@ -36,7 +35,6 @@ class BlogSettingController extends Controller
             BlogSetting::create($validated);
         }
 
-        return redirect()->route('admin.blogs.index')
-            ->with('success', 'Blog ayarları başarıyla güncellendi.');
+        return redirect()->back()->with('success', 'Blog ayarları başarıyla güncellendi.');
     }
 } 

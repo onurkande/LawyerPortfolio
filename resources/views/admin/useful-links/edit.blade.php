@@ -17,7 +17,7 @@
                             <label for="image">Görsel</label>
                             @if($usefulLink->image)
                                 <div class="mb-3">
-                                    <img src="{{ asset($usefulLink->image) }}" alt="Current Image" style="max-width: 200px;">
+                                    <img src="{{ asset('storage/'.$usefulLink->image) }}" alt="Current Image" style="max-width: 200px;">
                                 </div>
                             @endif
                             <div class="input-group">

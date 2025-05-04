@@ -51,7 +51,7 @@
                             <label for="image">Görsel</label>
                             @if($about && $about->image)
                                 <div class="mb-2">
-                                    <img src="{{ asset($about->image) }}" alt="{{ $about->title }}" class="img-thumbnail" style="max-height: 200px;">
+                                    <img src="{{ asset('storage/'.$about->image) }}" alt="{{ $about->title }}" class="img-thumbnail" style="max-height: 200px;">
                                 </div>
                             @endif
                             <div class="custom-file">
